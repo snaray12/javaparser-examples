@@ -79,7 +79,7 @@ public class SourceFileProcessor {
 	}
 	
 	public static void main(String[] args) {
-		SourceFileProcessor sfp = new SourceFileProcessor("/Users/kzht165/01_arena/example/src/main/java/com/example/Hello.java");
+		SourceFileProcessor sfp = new SourceFileProcessor(args[0]);
 		System.out.println(sfp.getClassName());
 		sfp.getConstructorList();
 	}
