@@ -16,10 +16,8 @@ import com.github.javaparser.ast.CompilationUnit;
  */
 public class App 
 {
-	public App(String path) throws IOException {
-		Path p = Paths.get(path);
-    	BufferedReader reader = Files.newBufferedReader(p, StandardCharsets.UTF_8);
-    	CompilationUnit sourceCompilatinUnit = JavaParser.parse(reader);
+	public App() throws IOException {
+    	CompilationUnit sourceCompilatinUnit = JavaParser.parse("class X { public X() {} }");
     	CustomVisitor cidv = new CustomVisitor();
     	sourceCompilatinUnit.accept(cidv, null);
     	ConstructorVisitor cv = new ConstructorVisitor();
@@ -28,6 +26,6 @@ public class App
 	}
     public static void main( String[] args ) throws IOException
     {
-    	new App(args[0]);
+    	new App();
     }
 }

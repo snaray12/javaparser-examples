@@ -17,7 +17,7 @@ public class SourceFileProcessor {
 	private String packageDeclaration;
 	private String className;
 	private Class srcClass;
-	
+
 	public void getConstructorList() {
 		System.out.println("Getting constructor list");
 		ConstructorVisitor cv = new ConstructorVisitor();
@@ -28,7 +28,7 @@ public class SourceFileProcessor {
 			System.out.println(val);
 		}
 	}
-	
+
 	public Class getSourceClass() {
 		if(null == srcClass) {
 			Object[] cidv = visitClassOrInterfaceDeclaration();
@@ -41,7 +41,7 @@ public class SourceFileProcessor {
 		ClassOrInterfaceDeclarationVisitor cidv = new ClassOrInterfaceDeclarationVisitor();
 		return this.sourceCompilatinUnit.accept(cidv, null);
 	}
-	
+
 	public String getClassName() {
 		if(null == className) {
 			Object[] cidv = visitClassOrInterfaceDeclaration();
@@ -49,37 +49,31 @@ public class SourceFileProcessor {
 		}
 		return className;
 	}
-	
+
 	public String getPackageDeclaration() {
 		if(null == packageDeclaration) {
 			packageDeclaration = sourceCompilatinUnit.getPackageDeclaration().get().getName().asString();
 		}
 		return packageDeclaration;
 	}
-	
+
 	public SourceFileProcessor(String fileName) {
 		this.sourceFileName = fileName;
 		this.createCompilationUnit(fileName);
 	}
-	
+
 	public SourceFileProcessor(CompilationUnit cu) {
 		this.sourceCompilatinUnit = cu;
 	}
 
-	
+
 	private void createCompilationUnit(String fileName) {
-		Path p = Paths.get(this.sourceFileName);
-		try {
-			BufferedReader reader = Files.newBufferedReader(p, StandardCharsets.UTF_8);
-			this.sourceCompilatinUnit = JavaParser.parse(reader);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+			this.sourceCompilatinUnit = JavaParser.parse(fileName);
+
 	}
-	
+
 	public static void main(String[] args) {
-		SourceFileProcessor sfp = new SourceFileProcessor(args[0]);
+		SourceFileProcessor sfp = new SourceFileProcessor("class X { X() {} }");
 		System.out.println(sfp.getClassName());
 		sfp.getConstructorList();
 	}
