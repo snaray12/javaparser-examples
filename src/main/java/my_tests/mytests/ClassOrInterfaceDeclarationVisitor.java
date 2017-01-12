@@ -10,12 +10,10 @@ public class ClassOrInterfaceDeclarationVisitor extends GenericVisitorAdapter<Ob
 	
 	@Override
 	public Object[] visit(ClassOrInterfaceDeclaration cid, Void arg) {
-		Object[] obj = new Object[2];
 		System.out.println("class or interface declaration visitor");
-		className = cid.getName().getIdentifier();
+		className = cid.getNameAsString();
 		thisClass = cid.getClass();
-		obj[0] = className;
-		obj[1] = thisClass;
-		return obj;
+		// You could (ab)use JavaParser's Pair class here.
+		return new Object[]{className, thisClass};
 	}
 }

@@ -12,7 +12,11 @@ public class CustomVisitor extends VoidVisitorAdapter<Void> {
 	@Override
 	public void visit(ClassOrInterfaceDeclaration cid, Void arg) {
 		System.out.println("class or interface declaration visitor");
+		// Can use getNameAsString() here
 		className = cid.getName().getIdentifier();
+		// This only returns ClassOrInterfaceDeclaration.class.
+		// The AST only stores the strings from the source code.
+		// You need a symbol solver to add meaning to it.
 		thisClass = cid.getClass();
 	}
 }

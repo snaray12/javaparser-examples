@@ -52,7 +52,7 @@ public class SourceFileProcessor {
 
 	public String getPackageDeclaration() {
 		if(null == packageDeclaration) {
-			packageDeclaration = sourceCompilatinUnit.getPackageDeclaration().get().getName().asString();
+			packageDeclaration = sourceCompilatinUnit.getPackageDeclaration().get().getNameAsString();
 		}
 		return packageDeclaration;
 	}
